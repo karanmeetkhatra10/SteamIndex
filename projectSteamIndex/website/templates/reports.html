@@ -1,0 +1,65 @@
+{% extends "base.html" %} <!-- saying this template is the exact same as base.html and I can override any blocks that were defined within base.html -->
+{% block title %}Reports{% endblock %} <!-- overriding the block within base.html -->
+{% block stylesheet %}<link href="static/reports.css" rel="stylesheet"> {% endblock %} <!-- overriding the block stylesheet within base.html -->
+{% block content %}
+
+<h2>Generate Reports</h2>
+
+<!-- Form for multiple reports -->
+<form id="reportForm" method="POST" action="{{ url_for('auth.submit_reports') }}">
+    <div id="reportSections">
+        <!-- Initial report section -->
+        <div class="report-section">
+            <div class="form-group">
+                <label for="playerName">Player Name</label>
+                <input id="playerName" type="text" class="form-control" name="playerName[]" required autocomplete="off" list="playerNameSuggestions">
+                <datalist id="playerNameSuggestions">
+                    <!-- Suggestions will be dynamically added here -->
+                </datalist>
+            </div>
+            <div class="form-group">
+                <!-- Date Field -->
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="reportDate">Date</label>
+                        <input id="reportDate" type="date" class="form-control" name="reportDate[]" required>
+                    </div>
+                    <!-- Source Field -->
+                    <div class="col-sm-6">
+                        <label for="source">Source</label>
+                        <input id="source" type="text" class="form-control" name="source[]" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="reportText">Report Text</label>
+                <textarea id="reportText"class="form-control" name="reportText[]" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="question">Question (optional)</label>
+                <textarea id="question"class="form-control" name="question[]" rows="2"></textarea>
+            </div>
+            <button type="button" class="btn btn-danger delete-report-btn" id="deleteReportBtn">
+                <span class="fas fa-trash-alt"></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Button to add new report sections -->
+    <button type="button" class="btn btn-success mb-2" id="addReportBtn">
+        <span class="fas fa-plus"></span>
+    </button>
+    <!-- Button to reset all fields -->
+    <button type="button" class="btn btn-secondary mb-2" id="resetAllFieldsBtn">
+        <span class="fas fa-sync-alt"></span>
+    </button>
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary">Submit All Reports</button>
+</form>
+
+
+<script
+        type="text/javascript"
+        src="{{ url_for('static', filename='reports.js') }}"
+></script>
+{% endblock %}

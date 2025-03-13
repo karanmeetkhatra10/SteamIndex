@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DraftKings Lineup Optimizer</title>
+  <!-- Include Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .table-container {
+      max-height: 400px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      margin-top: 20px;
+    }
+    #optimalLineups {
+      margin-top: 20px;
+    }
+  </style>
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+</head>
+<body class="container my-4">
+<h1 class="text-center">DraftKings Lineup Optimizer</h1>
+
+<!-- Filters -->
+<div class="row mb-3">
+  <div class="col-md-4">
+    <label for="positionFilter" class="form-label">Filter by Position</label>
+    <select id="positionFilter" class="form-select">
+      <option value="All">All</option>
+      <option value="QB">Quarterback (QB)</option>
+      <option value="RB">Running Back (RB)</option>
+      <option value="WR">Wide Receiver (WR)</option>
+      <option value="TE">Tight End (TE)</option>
+      <option value="DST">Defense/Special Teams (DST)</option>
+    </select>
+  </div>
+  <div class="col-md-4">
+    <label for="playerSearch" class="form-label">Search by Name</label>
+    <input type="text" id="playerSearch" class="form-control" placeholder="Search players">
+  </div>
+</div>
+
+<!-- Player Table -->
+<div class="table-container">
+  <table id="playerTable" class="table table-striped">
+    <thead>
+    <tr>
+      <th>Lock</th>
+      <th>Exclude</th>
+      <th>Name</th>
+      <th>Team</th>
+      <th>Opponent</th>
+      <th>Position</th>
+      <th>Salary</th>
+      <th>Projected Points</th>
+      <th>Ownership</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for player in players %}
+    <tr>
+      <td><input type="checkbox" class="lock-checkbox" data-name="{{ player['name'] }}"></td>
+      <td><input type="checkbox" class="exclude-checkbox" data-name="{{ player['name'] }}"></td>
+      <td>{{ player['name'] }}</td>
+      <td>{{ player['team'] }}</td>
+      <td>{{ player['opponent'] }}</td>
+      <td>{{ player['position'] }}</td>
+      <td>{{ player['salary'] }}</td>
+      <td>{{ player['points'] }}</td>
+      <td>{{ player['ownership'] }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<!-- Optimizer Controls -->
+<div class="my-3">
+  <label for="numLineups" class="form-label">Number of Lineups:</label>
+  <input type="number" id="numLineups" class="form-control" value="1" min="1" style="width: 120px; display: inline-block;">
+  <button class="btn btn-primary ms-2" onclick="runOptimizer()">Run Optimizer</button>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" id="stackCheckbox">
+  <label class="form-check-label" for="stackCheckbox">
+    Enforce QB-WR/TE Stack
+  </label>
+</div>
+
+<div class="col-md-3">
+  <h4>Player Appearances</h4>
+  <div id="playerSidebar" class="bg-light p-3 border rounded" style="height: 300px; overflow-y: auto;">
+    <!-- Player appearance counts will be injected here -->
+  </div>
+</div>
+<!-- Optimal Lineups Section -->
+<h2>Optimal Lineups</h2>
+<div id="optimalLineups"></div>
+
+<!-- Include Bootstrap JS and dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    // Filter players by position
+    $('#positionFilter').on('change', function () {
+      const selectedPosition = $(this).val();
+      $('#playerTable tbody tr').each(function () {
+        const position = $(this).find('td:nth-child(6)').text(); // Column 6: Position
+        if (selectedPosition === 'All' || position === selectedPosition) {
+          $(this).show();
+        } else {
+          $(this).hide();
+        }
+      });
+    });
+
+    // Search players by name
+    $('#playerSearch').on('input', function () {
+      const searchText = $(this).val().toLowerCase();
+      $('#playerTable tbody tr').each(function () {
+        const playerName = $(this).find('td:nth-child(3)').text().toLowerCase(); // Column 3: Name
+        if (playerName.includes(searchText)) {
+          $(this).show();
+        } else {
+          $(this).hide();
+        }
+      });
+    });
+  });
+</script>

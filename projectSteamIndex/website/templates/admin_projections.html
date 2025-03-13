@@ -1,0 +1,128 @@
+{% extends "base.html" %} <!-- saying this template is the exact same as base.html and I can override any blocks that were defined within base.html -->
+{% block title %}Admin{% endblock %} <!-- overriding the block within base.html -->
+{% block stylesheet %}<link href="static/admin_projections.css" rel="stylesheet"> {% endblock %} <!-- overriding the block stylesheet within base.html -->
+{% block content %}
+<h4 class="mt-5">Admin Projections</h4>
+<div id="loadingSpinner" class="loading-spinner" style="display: none;">
+    <div class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<div class="filter-bar mt-2">
+    <input type="text" id="searchInput" class="form-control" placeholder="Search by Player Name">
+    <select id="teamFilter" class="form-control">
+        <option value="Cardinals" selected>Arizona Cardinals</option>
+        <option value="Falcons">Atlanta Falcons</option>
+        <option value="Ravens">Baltimore Ravens</option>
+        <option value="Bills">Buffalo Bills</option>
+        <option value="Panthers">Carolina Panthers</option>
+        <option value="Bears">Chicago Bears</option>
+        <option value="Bengals">Cincinnati Bengals</option>
+        <option value="Browns">Cleveland Browns</option>
+        <option value="Cowboys">Dallas Cowboys</option>
+        <option value="Broncos">Denver Broncos</option>
+        <option value="Lions">Detroit Lions</option>
+        <option value="Packers">Green Bay Packers</option>
+        <option value="Texans">Houston Texans</option>
+        <option value="Colts">Indianapolis Colts</option>
+        <option value="Jaguars">Jacksonville Jaguars</option>
+        <option value="Chiefs">Kansas City Chiefs</option>
+        <option value="Raiders">Las Vegas Raiders</option>
+        <option value="Chargers">Los Angeles Chargers</option>
+        <option value="Rams">Los Angeles Rams</option>
+        <option value="Dolphins">Miami Dolphins</option>
+        <option value="Vikings">Minnesota Vikings</option>
+        <option value="Patriots">New England Patriots</option>
+        <option value="Saints">New Orleans Saints</option>
+        <option value="Giants">NY Giants</option>
+        <option value="Jets">NY Jets</option>
+        <option value="Eagles">Philadelphia Eagles</option>
+        <option value="Steelers">Pittsburgh Steelers</option>
+        <option value="49ers">San Francisco 49ers</option>
+        <option value="Seahawks">Seattle Seahawks</option>
+        <option value="Buccaneers">Tampa Bay Buccaneers</option>
+        <option value="Titans">Tennessee Titans</option>
+        <option value="Commanders">Washington Commanders</option>
+    </select>
+    <select id="positionFilter" class="form-control">
+        <option value="">Select Position</option>
+        <option value="QB">QB</option>
+        <option value="RB">RB</option>
+        <option value="WR">WR</option>
+        <option value="TE">TE</option>
+    </select>
+    <button id="deleteButton" class="btn btn-danger">Delete Selected</button>
+    <button id="resetButton" class="btn btn-primary">Reset Filters</button>
+    <button id="saveButton" class="btn btn-success">Save Changes</button>
+
+
+</div>
+
+<div class="table-responsive mt-3">
+    <table class="table table-bordered table-striped" id="qbTable">
+        <thead class="thead-dark">
+        <tr>
+            <th><input type="checkbox" id="selectAllQBs" name="selectAllQBs"></th>
+            <th>#</th>
+            <th>Name</th>
+            <th>Pos.</th>
+            <th>School</th>
+            <th>Orig</th>
+            <th>Exp</th>
+            <th>Gms</th>
+            <th>Att</th>
+            <th>Cmp</th>
+            <th>Pct</th>
+            <th>Yds</th>
+            <th>YPA</th>
+            <th>TD</th>
+            <th>TD%</th>
+            <th>Int</th>
+            <th>YPG</th>
+            <th>Sack</th>
+            <th>RAtt</th>
+            <th>RYds</th>
+            <th>RAvg</th>
+            <th>RYPG</th>
+            <th>RLg</th>
+            <th>RTD</th>
+            <th class="notes">Notes</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+<div class="table-responsive mt-3">
+    <table class="table table-bordered table-striped" id="skillPositionTable">
+        <thead class="thead-dark">
+        <tr>
+            <th><input type="checkbox" id="selectAll" name="selectAll"></th>
+            <th>#</th>
+            <th>Name</th>
+            <th>Pos.</th>
+            <th>School</th>
+            <th>Orig</th>
+            <th>Exp</th>
+            <th>Gms</th>
+            <th>RAtt</th>
+            <th>RYds</th>
+            <th>RAvg</th>
+            <th>RYPG</th>
+            <th>RLg</th>
+            <th>RTD</th>
+            <th>Rec</th>
+            <th>ReYds</th>
+            <th>ReAvg</th>
+            <th>ReYpg</th>
+            <th>ReLg</th>
+            <th>ReTD</th>
+            <th>Tar</th>
+            <th class="notes">Notes</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+<script type="text/javascript" src="{{ url_for('static', filename='admin_projections.js') }}"></script>
+{% endblock %}

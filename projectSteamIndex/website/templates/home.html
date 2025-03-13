@@ -1,0 +1,104 @@
+{% extends "base.html" %} <!-- saying this template is the exact same as base.html and I can override any blocks that were defined within base.html -->
+{% block title %}Home{% endblock %} <!-- overriding the block within base.html -->
+{% block stylesheet %}<link href="static/quotes.css" rel="stylesheet"> {% endblock %} <!-- overriding the block stylesheet within base.html -->
+{% block content %}
+<h2 class="mt-5">Quotes</h2>
+<button type="submit" class="btn btn-primary" onClick="generate_transcript()">Generate Transcripts</button>
+<button id="deleteSelected" class="btn btn-danger" onClick="deleteSelectedQuotes()" disabled>Delete Selected</button>
+<p id="result2"></p>
+<div class="filter-bar mt-2">
+    <input type="text" id="searchInput" class="form-control" placeholder="Search by player name">
+    <select id="teamFilter" class="form-control">
+        <option value="">Select Team</option>
+        <option value="Arizona Cardinals">Arizona Cardinals</option>
+        <option value="Atlanta Falcons">Atlanta Falcons</option>
+        <option value="Baltimore Ravens">Baltimore Ravens</option>
+        <option value="Buffalo Bills">Buffalo Bills</option>
+        <option value="Carolina Panthers">Carolina Panthers</option>
+        <option value="Chicago Bears">Chicago Bears</option>
+        <option value="Cincinnati Bengals">Cincinnati Bengals</option>
+        <option value="Cleveland Browns">Cleveland Browns</option>
+        <option value="Dallas Cowboys">Dallas Cowboys</option>
+        <option value="Denver Broncos">Denver Broncos</option>
+        <option value="Detroit Lions">Detroit Lions</option>
+        <option value="Green Bay Packers">Green Bay Packers</option>
+        <option value="Houston Texans">Houston Texans</option>
+        <option value="Indianapolis Colts">Indianapolis Colts</option>
+        <option value="Jacksonville Jaguars">Jacksonville Jaguars</option>
+        <option value="Kansas City Chiefs">Kansas City Chiefs</option>
+        <option value="Las Vegas Raiders">Las Vegas Raiders</option>
+        <option value="Los Angeles Chargers">Los Angeles Chargers</option>
+        <option value="Los Angeles Rams">Los Angeles Rams</option>
+        <option value="Miami Dolphins">Miami Dolphins</option>
+        <option value="Minnesota Vikings">Minnesota Vikings</option>
+        <option value="New England Patriots">New England Patriots</option>
+        <option value="New Orleans Saints">New Orleans Saints</option>
+        <option value="NY Giants">NY Giants</option>
+        <option value="NY Jets">NY Jets</option>
+        <option value="Philadelphia Eagles">Philadelphia Eagles</option>
+        <option value="Pittsburgh Steelers">Pittsburgh Steelers</option>
+        <option value="San Francisco 49ers">San Francisco 49ers</option>
+        <option value="Seattle Seahawks">Seattle Seahawks</option>
+        <option value="Tampa Bay Buccaneers">Tampa Bay Buccaneers</option>
+        <option value="Tennessee Titans">Tennessee Titans</option>
+        <option value="Washington Commanders">Washington Commanders</option>
+    </select>
+    <select id="positionFilter" class="form-control">
+        <option value="">Select Position</option>
+        <option value="QB">QB</option>
+        <option value="RB">RB</option>
+        <option value="WR">WR</option>
+        <option value="TE">TE</option>
+    </select>
+    <select id="sourceFilter" class="form-control">
+        <option value="">Select Source</option>
+        <option value="Coach">Coach</option>
+        <option value="Player">Player</option>
+        <option value="Reporter">Reporter</option>
+    </select>
+</div>
+<div class="filter-bar mt-2">
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" class="form-control">
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" class="form-control">
+    <select id="weekFilter" class="form-control">
+        <option value="">Select Week</option>
+        <option value="Pre Week 1">Preseason Week 1</option>
+        <option value="Pre Week 2">Preseason Week 2</option>
+        <option value="Pre Week 3">Preseason Week 3</option>
+        <option value="Week 1">Week 1</option>
+        <option value="Week 2">Week 2</option>
+        <option value="Week 3">Week 3</option>
+        <option value="Week 4">Week 4</option>
+        <option value="Week 5">Week 5</option>
+        <option value="Week 6">Week 6</option>
+        <option value="Week 7">Week 7</option>
+        <option value="Week 8">Week 8</option>
+        <option value="Week 9">Week 9</option>
+        <option value="Week 10">Week 10</option>
+        <option value="Week 11">Week 11</option>
+        <option value="Week 12">Week 12</option>
+        <option value="Week 13">Week 13</option>
+        <option value="Week 14">Week 14</option>
+        <option value="Week 15">Week 15</option>
+        <option value="Week 16">Week 16</option>
+        <option value="Week 17">Week 17</option>
+        <option value="Week 18">Week 18</option>
+    </select>
+    <button id="pastWeek" class="btn btn-primary">Past Week</button>
+    <button id="pastMonth" class="btn btn-primary">Past Month</button>
+    <button id="resetButton" class="btn btn-primary">Reset Filters</button>
+</div>
+<div id="quotes" class="mt-3"></div>
+<div id="loadingSpinner" class="loading-spinner" style="display: none;">
+    <div class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<script
+        type="text/javascript"
+        src="{{ url_for('static', filename='dateFilters.js') }}"
+></script>
+<script type="text/javascript" src="{{ url_for('static', filename='quotes.js') }}"></script>
+{% endblock %}

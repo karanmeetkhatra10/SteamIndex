@@ -1,0 +1,156 @@
+.container {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #343a40;
+    border-radius: 8px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 1em;
+    text-align: left;
+    background-color: #212529;
+    color: white;
+}
+
+.btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.form-control {
+    background-color: #212529;
+    color: #f0f0f0;
+}
+
+option {
+    background-color: #212529;
+    color: #f0f0f0;
+}
+
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.filter-bar .form-control,
+.filter-bar .btn {
+    flex: 1;
+}
+
+.filter-bar label {
+    margin-right: 5px;
+    color: #f0f0f0;
+}
+
+.highlight-delete {
+    background-color: #ffcccc; /* Light red background */
+    transition: background-color 0.3s ease;
+}
+
+th {
+    cursor: pointer;
+}
+
+/* Add this to sentiment.css */
+.trending-panel {
+    height: auto;
+    width: 230px !important;
+    position: absolute;
+    top: 124px; /* Adjusted to account for header */
+    right: -300px; /* Hide panel completely when closed */
+    background-color: #212529;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding: 0.5em;
+    color: white;
+    z-index: 1;
+    max-height: 500px; /* Enough to accommodate ten players */
+}
+
+.trending-panel h5 {
+    color: white;
+    text-align: center;
+    margin-top: 0;
+}
+
+.trending-panel ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    color: white;
+}
+
+.trending-panel ul li {
+    text-decoration: none;
+    color: white;
+    display: block;
+    transition: 0.3s;
+    text-align: center;
+}
+
+
+.tab-container {
+    position: absolute;
+    top: 76px; /* Adjust to move the tabs up */
+    right: 0;
+    display: flex;
+    width: 230px;
+    z-index: 2;
+    background-color: #212529;
+    padding-bottom: 8px;
+    padding-left: 8px;
+}
+
+.tab {
+    background-color: #111;
+    color: white;
+    padding: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: center;
+    border-radius: 4px;
+
+}
+
+.tab.active {
+    background-color: #343a40;
+}
+
+.firebtn {
+    margin-right: 5px;
+}
+
+.icebtn {
+    margin-left: 5px;
+}
+
+#trendingPlayersList {
+    font-size: 0.9rem;
+}
+
+

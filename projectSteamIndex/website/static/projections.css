@@ -1,0 +1,49 @@
+.table {
+    color: white;
+
+}
+
+.form-control {
+    background-color: #343a40;
+    color: #f0f0f0;
+    width: 40%;
+}
+option {
+    background-color: #343a40;
+    color: #f0f0f0;
+}
+select {
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}
+.filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-bar .form-control,
+.filter-bar .btn {
+    flex: 1;
+}
+
+.table-responsive td {
+    max-width: 400px;
+    overflow: auto;
+}
+
+.table-responsive .question-report-cell {
+    white-space: pre-wrap; /* Allows line breaks */
+}
+
+h4 {
+    text-align: center;
+}
+
+.notes {
+    width:75%;
+}
+
+.hidden {
+    display: none;
+}

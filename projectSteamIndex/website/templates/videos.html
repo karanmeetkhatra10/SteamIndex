@@ -1,0 +1,34 @@
+{% extends "base.html" %} <!-- saying this template is the exact same as base.html and I can override any blocks that were defined within base.html -->
+{% block title %}Videos{% endblock %} <!-- overriding the block within base.html -->
+{% block stylesheet %}<link href="static/videos.css" rel="stylesheet"> {% endblock %} <!-- overriding the block stylesheet within base.html -->
+{% block content %}
+<h2>Video Manager</h2>
+<button type="submit" class="btn btn-primary" onClick="download_yt()">Download</button>
+<p id="result"></p>
+<button id="deleteSelected" class="btn btn-danger" disabled>Delete Selected</button>
+<div class="filter-container">
+    <label for="teamFilter">Filter by Team:</label>
+    <select id="teamFilter" class="form-control">
+        <option value="all">Select Team</option>
+    </select>
+</div>
+<table id="videosTable" class="table">
+    <thead>
+    <tr>
+        <th></th>
+        <th>Title</th>
+        <th>Team</th>
+        <th>Date Published</th>
+        <th>Duration</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Video rows will be added here dynamically -->
+    </tbody>
+</table>
+<script
+        type="text/javascript"
+        src="{{ url_for('static', filename='videos.js') }}"
+></script>
+{% endblock %}
