@@ -1,7 +1,8 @@
-from website import create_app  # since website is a python package with the __init__.py anytime we import it, it will automatically run whatever is in the __init__.py
+import os
+from website import create_app
 
 app = create_app()
 
-if __name__ == '__main__':  # only want it to run the webserver if we run the main
-    app.run(debug=True)
-
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 10000))  # Use the port assigned by Render
+    app.run(host='0.0.0.0', port=port, debug=False)  # Debug should be False in production
